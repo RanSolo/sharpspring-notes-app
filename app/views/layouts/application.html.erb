@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SharpspringNotesApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="background: #FfF">
+    <div
+      class='navbar navbar navbar-dark bg-dark navbar-expand-lg pl-3 mb-3'
+      id="user_nav"
+    >
+      <div class="navbar-brand">Other Notes</div>
+      <ul class="navbar-nav mr-auto">
+        <% if current_user %>
+          <li class="nav-item text-info mr-2">
+            Logged in as <%= current_user.email %>.
+          </li>
+          <li class="nav-item">
+            <%= link_to "Log out", log_out_path %>
+          </li>
+        <% elsif !current_user && controller_name === 'sessions' %>
+          <li class="nav-item">
+            <%= link_to "Sign up", sign_up_path %>
+          </li>
+        <% elsif !current_user && controller_name === 'users' %>
+          <li class="nav-item">
+            <%= link_to "Log in", log_in_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= render 'shared/music_notes' %>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}", class:'text-center alert alert-success' %>
+    <% end %>
+    <div class="w-50 ml-auto mr-auto mb-5" >
+    <%= yield %>
+    </div>
+    <%= render 'shared/music_notes' %>
+  </body>
+</html>
+

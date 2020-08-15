@@ -1,0 +1,21 @@
+
+    <% @notes&.each do |note| %>
+      <tr>
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= note.title %></h5>
+          <p class="card-text"><%= note.body %></p>
+          <span>created by&nbsp;<%= current_user.email%>&nbsp;<%= note.created_at%>
+          <%= link_to 'Show', note, class: 'card-link' %>
+          <%= link_to 'Edit', edit_note_path(note), class: 'card-link' %>
+          <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link' %></div>
+          </div>
+          </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Note', new_note_path %>

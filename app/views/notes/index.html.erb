@@ -1,0 +1,57 @@
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button 
+          class="btn btn-sm btn-success"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="false"
+          aria-controls="collapseOne"
+        >
+          +
+        </button>
+        Take Note
+      </h5>
+    </div>
+
+    <div
+      id="collapseOne"
+      class="collapse hide"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <%= render 'form', note: @note %>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <% @notes&.each do |note| %>
+      <tr>
+        <div class="card" style="background: #Ffa">
+        <div class="card-body" >
+          <h5 class="card-title"><%= note.title %></h5>
+          <p class="card-text"><%= note.body %></p>
+          <span>
+            created by&nbsp;<%= current_user.email%>&nbsp;
+            <%= note.created_at.strftime("%a %r")%>
+          </span>
+          <%= link_to 'Show', note, class: 'card-link' %>
+          <%= link_to 'Edit', edit_note_path(note), class: 'card-link' %>
+          <%= link_to 'Destroy', note,
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'card-link'
+          %>
+          </div>
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

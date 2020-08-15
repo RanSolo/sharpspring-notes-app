@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+# migration to create the notes table
+class CreateNotes < ActiveRecord::Migration[6.0]
+  def change
+    create_table :notes do |t|
+      t.string :title
+      t.string :body
+      t.references :user, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
