@@ -2,13 +2,12 @@
 
 # notes controller
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[show edit update destroy]
-
+  before_action :set_note, only: %i[show edit update destroy note_email]
+  before_action :set_user, only: %i[index note_email]
   # GET /notes
   # GET /notes.json
   def index
     @note = Note.new
-    @user = User.find(current_user.id)
     @notes = @user.notes.order('created_at DESC')
   end
 
@@ -28,16 +27,21 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @note.title = @note.body[0...29] if @note.title.blank?
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to notes_path :index, notice: 'Note was successfully created.' }
-        format.json { render :show, status: :created, location: @note }
+        handle_successful_save(format, @note)
       else
-        format.html { render :new }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
+        handle_failed_save(format, @note.errors)
       end
     end
+  end
+
+  def note_email
+    NoteMailer.with(user: @user, note: @note)
+              .note_email
+              .deliver_now
   end
 
   # PATCH/PUT /notes/1
@@ -45,11 +49,9 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
-        format.json { render :show, status: :ok, location: @note }
+        handle_successful_update(format, @note)
       else
-        format.html { render :edit }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
+        handle_failed_update(format, @note.errors)
       end
     end
   end
@@ -66,13 +68,41 @@ class NotesController < ApplicationController
 
   private
 
+  def handle_successful_save(format, note)
+    format.html { redirect_to notes_url, notice: 'Note was successfully created.' }
+    format.json { render :show, status: :created, location: note }
+  end
+
+  def handle_failed_save(format, errors)
+    format.html { render :new }
+    format.json { render json: errors, status: :unprocessable_entity }
+  end
+
+  def handle_successful_update(format, note)
+    format.html { redirect_to note, notice: 'Note was successfully updated.' }
+    format.json { render :show, status: :ok, location: note }
+  end
+
+  def handle_failed_update(format, errors)
+    format.html { render :edit }
+    format.json { render json: errors, status: :unprocessable_entity }
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_note
     @note = Note.find(params[:id])
   end
 
+  def set_user
+    @user = User.find(current_user.id)
+  end
+
   # Only allow a list of trusted parameters through.
   def note_params
-    params.require(:note).permit(:title, :body, :user_id)
+    params.require(:note).permit(
+      :title,
+      :body,
+      :user_id
+    )
   end
 end

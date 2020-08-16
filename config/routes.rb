@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :notes
+
+  get :note_email, to: 'notes#note_email', as: :note_email
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
