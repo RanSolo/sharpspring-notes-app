@@ -43,7 +43,7 @@ class NotesController < ApplicationController
               .note_email
               .deliver_now
     flash[:success] = 'Note sent!'
-    redirect_to action: 'index'
+    redirect_to notes_path
   end
 
   # PATCH/PUT /notes/1
