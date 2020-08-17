@@ -14,26 +14,33 @@
   <form>
 	<div class='form-group'>
 		<%= f.label :first_name %><br />
-		<%= f.text_field :first_name, class: 'form-control w-50' %>
+		<%= f.text_field :first_name,
+			class: 'form-control w-50' %>
 	</div>
 	<div class='form-group'>
 		<%= f.label :last_name %><br />
-		<%= f.text_field :last_name, class: 'form-control w-50' %>
+		<%= f.text_field :last_name,
+			class: 'form-control w-50' %>
 	</div>
 	<div class='form-group'>
 		<%= f.label :email %><br />
-		<%= f.text_field :email, class: 'form-control w-50' %>
+		<%= f.text_field :email,
+			class: 'form-control w-50' %>
 	</div>
 	<div class='form-group'>
 		<%= f.label :password %><br />
-		<%= f.password_field :password, class: 'form-control w-50' %>
+		<%= f.password_field :password,
+			class: 'form-control w-50' %>
 	</div>
 	<div class='form-group'>
 		<%= f.label :password_confirmation %><br />
-		<%= f.password_field :password_confirmation, class: 'form-control w-50' %>
-	</div><br />	
+		<%= f.password_field :password_confirmation,
+			class: 'form-control w-50' %>
+	</div>
+	<br />	
 	<div class='form-group'>
-		<%= f.submit 'Sign up', class: 'btn btn-primary form-control w-50' %>
+		<%= f.submit 'Sign up',
+			class: 'btn btn-primary form-control w-50' %>
 	</div>
   </form>
 <% end %>

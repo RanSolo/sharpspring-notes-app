@@ -36,7 +36,8 @@
     </div>
     <%= render 'shared/music_notes' %>
     <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}", class:'text-center alert alert-success' %>
+      <%= content_tag :div, msg, :id => "flash_#{name}",
+          class:'text-center alert alert-success' %>
     <% end %>
     <div class="w-50 ml-auto mr-auto mb-5" >
     <%= yield %>
