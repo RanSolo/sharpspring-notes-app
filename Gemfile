@@ -28,7 +28,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'jquery-rails'
 # Use postgress as the database for Active Record
+gem 'honeybadger', '~> 4.0'
 gem 'pg'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
