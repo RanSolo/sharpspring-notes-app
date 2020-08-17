@@ -42,6 +42,8 @@ class NotesController < ApplicationController
     NoteMailer.with(user: @user, note: @note)
               .note_email
               .deliver_now
+    flash[:success] = 'Note sent!'
+    redirect_to action: 'index'
   end
 
   # PATCH/PUT /notes/1

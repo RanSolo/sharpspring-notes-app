@@ -1,0 +1,5 @@
+noteComplete:
+    id: 1
+    title: Label references for associations (belongs_to, has_one, has_many)
+    body: Specifying foreign keys in fixtures can be very fragile, not to mention difficult to read. Since Active Record can figure out the ID of any fixture from its label, you can specify FK’s by label instead of ID.
+    user: :one
