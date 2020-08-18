@@ -47,7 +47,7 @@
       <br />
     <%= link_to 'View', note, class:'btn btn-sm btn-primary' %>
     <%= link_to 'Edit', edit_note_path(note.id), class:'btn btn-sm btn-info' %>
-    <%= link_to 'X', @note,
+    <%= link_to 'X', note,
     method: :delete,
     data: { confirm: 'Are you sure?' },
     class:'btn btn-sm btn-danger'
