@@ -1,3 +1,4 @@
+<% if current_user.id == @note.user_id %>
 <h1>Editing Note</h1>
 
 
@@ -5,3 +6,6 @@
 <br />
 <%= link_to '<', @note, class:'btn btn-sm btn-primary' %>
 <%= link_to 'Notes', notes_path, class:'btn btn-sm btn-info' %>
+<% else %>
+Not your note to edit!
+<% end %>
