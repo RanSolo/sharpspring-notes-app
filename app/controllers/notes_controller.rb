@@ -41,7 +41,7 @@ class NotesController < ApplicationController
   def note_email
     NoteMailer.with(user: @user, note: @note)
               .note_email
-              .deliver_now
+              .deliver
     flash[:success] = 'Note sent!'
     redirect_to notes_path
   end
