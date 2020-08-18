@@ -20,8 +20,11 @@
           <li class="nav-item text-info mr-2">
             Logged in as <%= current_user.email %>.
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to "Log out", log_out_path %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Notes", notes_path %>
           </li>
         <% elsif !current_user && controller_name === 'sessions' %>
           <li class="nav-item">
