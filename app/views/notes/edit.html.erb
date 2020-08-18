@@ -1,6 +1,7 @@
 <h1>Editing Note</h1>
 
-<%= render 'form', note: @note %>
 
-<%= link_to 'Show', @note %> |
-<%= link_to 'Back', notes_path %>
+<%= render 'form', note: @note %>
+<br />
+<%= link_to '<', @note, class:'btn btn-sm btn-primary' %>
+<%= link_to 'Notes', notes_path, class:'btn btn-sm btn-info' %>
