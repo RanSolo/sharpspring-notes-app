@@ -3,7 +3,7 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button 
-          class="btn btn-sm btn-success"
+          class="btn btn-sm btn-success col-1"
           data-toggle="collapse"
           data-target="#collapseOne"
           aria-expanded="false"
@@ -31,27 +31,29 @@
 <% @notes&.each do |note| %>
   <div class="card" style="background: #Ffa">
     <div class="card-body" >
-    <%= link_to "Send note to my email",
+    <%= link_to "Send this note to my email",
           :controller => "notes",
           :action => "note_email",
           :id => note.id 
       %>
+      <br />
       <h5 class="card-title"><%= note.title %></h5>
       <p class="card-text"><%= note.body %></p>
       
       <span>
-        created 
+        Created by
         <%= current_user.first_name + ' ' + current_user.last_name %>
-        <%= note.created_at.strftime("%a %r") %>
+        <%= note.created_at.strftime("%a %r") %>.
       </span>
       <br />
-    <%= link_to 'View', note, class:'btn btn-sm btn-primary' %>
-    <%= link_to 'Edit', edit_note_path(note.id), class:'btn btn-sm btn-info' %>
+      <br />
+    <%= link_to 'View', note, class:'btn btn-sm btn-primary col-1' %>
+    <%= link_to 'Edit', edit_note_path(note.id), class:'btn btn-sm btn-info col-1' %>
     <%= link_to 'X', note,
-    method: :delete,
-    data: { confirm: 'Are you sure?' },
-    class:'btn btn-sm btn-danger'
-%>
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class:'btn btn-sm btn-danger col-1'
+    %>
     </div>
   </div>
 <% end %>
