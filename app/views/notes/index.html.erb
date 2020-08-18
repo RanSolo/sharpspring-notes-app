@@ -31,28 +31,27 @@
 <% @notes&.each do |note| %>
   <div class="card" style="background: #Ffa">
     <div class="card-body" >
-      <h5 class="card-title"><%= note.title %></h5>
-      <p class="card-text"><%= note.body %></p>
-      <span>
-        created by&nbsp;<%= current_user.email%>&nbsp;
-        <%= note.created_at.strftime("%a %r")%>
-      </span>
-      <%= link_to "Send note to my email",
+    <%= link_to "Send note to my email",
           :controller => "notes",
           :action => "note_email",
           :id => note.id 
       %>
-      <%= link_to 'Show', note, 
-          class: 'card-link' 
-      %>
-      <%= link_to 'Edit', edit_note_path(note),
-          class: 'card-link' 
-      %>
-      <%= link_to 'Destroy', note,
-          method: :delete,
-          data: { confirm: 'Are you sure?' },
-          class: 'card-link' 
-      %>
+      <h5 class="card-title"><%= note.title %></h5>
+      <p class="card-text"><%= note.body %></p>
+      
+      <span>
+        created 
+        <%= current_user.first_name + ' ' + current_user.last_name %>
+        <%= note.created_at.strftime("%a %r") %>
+      </span>
+      <br />
+    <%= link_to 'View', note, class:'btn btn-sm btn-primary' %>
+    <%= link_to 'Edit', edit_note_path(note.id), class:'btn btn-sm btn-info' %>
+    <%= link_to 'X', @note,
+    method: :delete,
+    data: { confirm: 'Are you sure?' },
+    class:'btn btn-sm btn-danger'
+%>
     </div>
   </div>
 <% end %>

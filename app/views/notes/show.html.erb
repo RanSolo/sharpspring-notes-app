@@ -1,14 +1,29 @@
 <p id="notice"><%= notice %></p>
+<%= link_to '<', notes_path, class:'btn btn-sm btn-primary' %>
+<%= link_to 'Edit', edit_note_path, class:'btn btn-sm btn-info' %>
+<%= link_to 'X', @note,
+    method: :delete,
+    data: { confirm: 'Are you sure?' },
+    class:'btn btn-sm btn-danger'
+%>
 
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @note.body %>
-</p>
-
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+<div class="card" style="background: #Ffa">
+    <div class="card-body" >
+        <%= link_to "Send note to my email",
+            :controller => "notes",
+            :action => "note_email",
+            :id => @note.id
+        %>
+        <h5 class="card-title">
+            <%= @note.title %>
+        </h5>
+        <p class="card-text">
+            <%= @note.body %>
+        </p>
+        <span>
+            Created by
+            <%= current_user.first_name + ' ' + current_user.last_name %>
+            <%= @note.created_at.strftime("%a %r") %>.
+        </span>
+    </div>
+</div>
