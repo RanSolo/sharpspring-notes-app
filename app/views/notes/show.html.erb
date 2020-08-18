@@ -1,4 +1,4 @@
-<% if current_user.id == @note.user_id%>
+<% if current_user.id == @note.user_id %>
     <p id="notice"><%= notice %></p>
     <div class="card" style="background: #Ffa">
         <div class="card-body" >
@@ -33,4 +33,6 @@
             class:'btn btn-sm btn-danger col-1'
         %>
     </div>
+<% else %>
+<h1>This isn't your note sneaky.</h1>
 <% end %>
