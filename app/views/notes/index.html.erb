@@ -29,7 +29,7 @@
 </div>
 
 <% @notes&.each do |note| %>
-  <%= link_to "Send note by email",
+  <%= link_to "Send note to my email",
     :controller => "notes",
     :action => "note_email",
     :id => note.id 
