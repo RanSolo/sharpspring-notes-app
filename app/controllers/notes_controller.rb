@@ -4,6 +4,7 @@
 class NotesController < ApplicationController
   before_action :set_note, only: %i[show edit update destroy note_email]
   before_action :set_user, only: %i[index note_email]
+  before_action :require_login
   # GET /notes
   # GET /notes.json
   def index
@@ -70,6 +71,30 @@ class NotesController < ApplicationController
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
+
+  def set_user
+    return if current_user.blank?
+
+    @user = User.find(current_user.id)
+  end
+
+  # Only allow a list of trusted parameters through.
+  def note_params
+    params.require(:note).permit(
+      :title,
+      :body,
+      :user_id
+    )
+  end
+
+  def require_login
+    redirect_to log_in_path if current_user.blank?
+  end
+
   def handle_successful_save(format, note)
     format.html { redirect_to notes_url, notice: 'Note was successfully created.' }
     format.json { render :show, status: :created, location: note }
@@ -88,23 +113,5 @@ class NotesController < ApplicationController
   def handle_failed_update(format, errors)
     format.html { render :edit }
     format.json { render json: errors, status: :unprocessable_entity }
-  end
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_note
-    @note = Note.find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(current_user.id)
-  end
-
-  # Only allow a list of trusted parameters through.
-  def note_params
-    params.require(:note).permit(
-      :title,
-      :body,
-      :user_id
-    )
   end
 end

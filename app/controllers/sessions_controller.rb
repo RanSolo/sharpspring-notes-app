@@ -2,7 +2,9 @@
 
 # sessions controller
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    redirect_to notes_path if current_user
+  end
 
   def create
     user = User.authenticate(params[:email], params[:password])
