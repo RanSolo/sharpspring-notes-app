@@ -14,7 +14,9 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   # GET /notes/1.json
-  def show; end
+  def show
+
+  end
 
   # GET /notes/new
   def new

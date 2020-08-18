@@ -1,34 +1,36 @@
-<p id="notice"><%= notice %></p>
-<div class="card" style="background: #Ffa">
-    <div class="card-body" >
-        <%= link_to "Send note to my email",
-            :controller => "notes",
-            :action => "note_email",
-            :id => @note.id
-        %>
-        <h5 class="card-title">
-            <%= @note.title %>
-        </h5>
-        <p class="card-text">
-            <%= @note.body %>
-        </p>
-        <span>
-            Created by
-            <%= current_user.first_name + ' ' + current_user.last_name %>
-            <%= @note.created_at.strftime("%a %r") %>.
-        </span>
+<% if current_user.id == @note.user_id%>
+    <p id="notice"><%= notice %></p>
+    <div class="card" style="background: #Ffa">
+        <div class="card-body" >
+            <%= link_to "Send note to my email",
+                :controller => "notes",
+                :action => "note_email",
+                :id => @note.id
+            %>
+            <h5 class="card-title">
+                <%= @note.title %>
+            </h5>
+            <p class="card-text">
+                <%= @note.body %>
+            </p>
+            <span>
+                Created by
+                <%= current_user.first_name + ' ' + current_user.last_name %>
+                <%= @note.created_at.strftime("%a %r") %>.
+            </span>
+        </div>
     </div>
-</div>
-<div class='row ml-1'>
-    <%= link_to '<', notes_path,
-        class:'btn btn-sm btn-primary col-1' 
-    %>
-    <%= link_to 'Edit', edit_note_path,
-        class:'btn btn-sm btn-info col-1'
-    %>
-    <%= link_to 'X', @note,
-        method: :delete,
-        data: { confirm: 'Are you sure?' },
-        class:'btn btn-sm btn-danger col-1'
-    %>
-</div>
+    <div class='row ml-1'>
+        <%= link_to '<', notes_path,
+            class:'btn btn-sm btn-primary col-1' 
+        %>
+        <%= link_to 'Edit', edit_note_path,
+            class:'btn btn-sm btn-info col-1'
+        %>
+        <%= link_to 'X', @note,
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class:'btn btn-sm btn-danger col-1'
+        %>
+    </div>
+<% end %>
