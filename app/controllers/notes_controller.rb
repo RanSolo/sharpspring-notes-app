@@ -14,9 +14,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   # GET /notes/1.json
-  def show
-
-  end
+  def show; end
 
   # GET /notes/new
   def new
@@ -64,6 +62,8 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
+    return if current_user.id != @note.id
+
     @note.destroy
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
